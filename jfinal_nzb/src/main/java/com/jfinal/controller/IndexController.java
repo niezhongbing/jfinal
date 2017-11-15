@@ -12,7 +12,9 @@ import com.jfinal.interceptor.BInterceptor;
 import com.jfinal.interceptor.ClassControllerInterceptort;
 import com.jfinal.interceptor.MethodIntercept;
 import com.jfinal.model.Blog;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlPara;
 @Before(ClassControllerInterceptort.class)
 public class IndexController extends Controller{
@@ -31,7 +33,15 @@ public class IndexController extends Controller{
 	
 	public void doAdd(){
 		Blog blog = getModel(Blog.class,"b");
-		blog.save();
+		
+		/*第一种操作数据库方法
+		 * blog.save();*/
+		
+		//第二种操作数据库方法
+		Record record = new Record();
+		record.setColumns(blog);
+		Db.save("blog", record);
+		
 		renderText("提交成功");
 	}
 	
