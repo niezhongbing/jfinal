@@ -10,5 +10,13 @@
 	<p>描述:<textarea rows="10" cols="100" name="b.content"></textarea></p>
 	<p><input type="submit" value="提交"></p>
 </form>
+
+#for(x:[0..10])
+	#(for.count).#(x)+#(for.size)<br>
+#end
+#@testFunction()
+#(test1())
+#(test2())
+#(sm.test2())
 </body>
 </html>
