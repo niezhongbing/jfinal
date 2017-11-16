@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jfinal登录界面</title>
+</head>
+<body>
+	<form action="#(ctx)/login/login" method="post">
+	<p>标题:<input type="text" name="title" value="#(title??)"/></p>
+	<p>描述:<textarea rows="10" cols="100" name="content" >#(content??)</textarea></p>
+	<p><input type="submit" value="提交"></p>
+</form>
+</body>
+</html>
