@@ -6,7 +6,7 @@ import com.jfinal.Engine.StaticMethodS;
 import com.jfinal.Rotue.AdminRoute;
 import com.jfinal.Rotue.FrontRoute;
 import com.jfinal.controller.InjectController;
-import com.jfinal.controller.LoginController;
+import com.jfinal.controller.ProductController;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.interceptor.GlobalInterceptor;
@@ -33,10 +33,11 @@ public class MyConfig extends JFinalConfig{
 	@Override
 	public void configRoute(Routes me) {
 		// TODO Auto-generated method stub
-		me.add("/login", LoginController.class);
-		/*me.add("/inject", InjectController.class);
+		me.add("/product", ProductController.class);
+		
+		me.add("/inject", InjectController.class);
 		me.add(new FrontRoute());
-		me.add(new AdminRoute());*/
+		me.add(new AdminRoute());
 	}
 	public static DruidPlugin createDruidPlugin() {
 		return new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password").trim());
@@ -80,8 +81,8 @@ public class MyConfig extends JFinalConfig{
 		
 		
 		//任务调度
-		Cron4jPlugin cron = new Cron4jPlugin(PropKit.use("cron.txt"));
-		me.add(cron);
+		/*Cron4jPlugin cron = new Cron4jPlugin(PropKit.use("cron.txt"));
+		me.add(cron);*/
 	}
 
 	//配置拦截器
@@ -96,7 +97,7 @@ public class MyConfig extends JFinalConfig{
 	@Override
 	public void configHandler(Handlers me) {
 		// TODO Auto-generated method stub
-		me.add(new ContextPathHandler("ctx"));
+		me.add(new ContextPathHandler("basePath"));
 	}
 	
 	
