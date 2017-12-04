@@ -1,0 +1,9 @@
+.idea
+.idea/
+.DS_Store
+node_modules/
+dist
+dist/*
+src/config/*.tmp
+src/config/env.js
+/index.html
