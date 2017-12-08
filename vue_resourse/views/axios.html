@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+        integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script src="../node_modules/vue-resource/dist/vue-resource.js"></script>
+  <script src="../node_modules/axios/dist/axios.js"></script>
+</head>
+<body>
+<center>
+  <div id="app">
+    <h1>这个是resource讲解</h1>
+    <a href="Javascript:;" class="btn btn-primary" v-on:click="get">Get请求</a>
+    <a href="Javascript:;" class="btn btn-primary" v-on:click="post">Post请求</a>
+    <a href="Javascript:;" class="btn btn-primary" v-on:click="jsonp">JSONP请求</a>
+    <a href="Javascript:;" class="btn btn-primary" @click="http">http请求</a>
+    <br>
+    <span>{{msg}}</span>
+  </div>
+</center>
+</body>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      msg: ""
+    },
+    mounted: function () {
+      axios.interceptors.request.use(res=>{ //axios全局请求拦截器
+        console.log("axios request init " + res)
+        return res;
+      })
+      axios.interceptors.response.use(res=>{ //axios全局响应拦截器
+        console.log("axios response init " + res)
+        return res;
+      })
+    },
+    methods: {
+      get: function() {
+        axios.get('../package.json',{
+          params: {
+            userId: '104'
+          },
+          headers:{
+            token: '123'
+          },
+          timeout: 5
+        }).then(res=>{
+          this.msg = res.data;
+        }).catch(error=>{
+          this.msg = error;
+        });
+      },
+      post: function() {
+        axios.post('../package.json', {
+          userId:'888'
+          },{
+            headers:{
+              token: "axios post"
+            }
+          }
+        ).then(res=>{
+          this.msg = res.data;
+        });
+      },
+      jsonp: function() {
+
+      },
+      http: function (){
+          axios({
+            url:"../package.json",
+            method:"get",
+            data:{
+            },
+            params:{userId:"1045"},
+            headers:{
+              token: "http-test"
+            }
+          }).then(res=>{
+            this.msg = res.data;
+          });
+      }
+    }
+  });
+</script>
+</html>
