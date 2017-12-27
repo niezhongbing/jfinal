@@ -59,6 +59,7 @@
   import NavHeader from '@/components/NavHeader'
   import NavFooter from '@/components/NavFooter'
   import NavBread from '@/components/NavBread'
+  import axios from 'axios'
   export default{
     data(){
       return {
@@ -91,8 +92,8 @@
      methods:{
       getGoodsList(){
         var _this = this;
-        _this.$http.get('/api/goods').then((res)=>{
-          _this.goodsList = res.body.result;
+        axios.get('/api/goods').then((res)=>{
+          _this.goodsList = res.data.result;
           console.log( _this.goodsList)
        });
       },
