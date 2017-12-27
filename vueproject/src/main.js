@@ -4,7 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueResource from 'vue-resource';
+import vueLazyLoad from 'vue-lazyload'
 Vue.use(VueResource);
+Vue.use(vueLazyLoad,{
+  loading:"/static/loading-svg/loading-bars.svg"
+});
 
 Vue.config.productionTip = false
 
